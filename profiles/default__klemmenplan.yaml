@@ -1,0 +1,57 @@
+# Default Klemmenplan / Verschaltungsliste extraction profile.
+#
+# vendor: "default"
+# doc_type: "Klemmenplan"
+
+vendor: default
+doc_type: Klemmenplan
+description: "Default profile for Klemmenplan / Verschaltungsliste extraction"
+
+field_aliases:
+  akz:
+    - "AKZ"
+    - "PLT-Stelle"
+    - "Messstelle"
+    - "Tag"
+    - "Kennzeichen"
+    - "Klemme"
+  terminal:
+    - "Klemme"
+    - "Terminal"
+    - "Anschluss"
+    - "Klemmenbezeichnung"
+  function:
+    - "Funktion"
+    - "Fkt"
+    - "Signalart"
+    - "Function"
+  description:
+    - "Beschreibung"
+    - "Bezeichnung"
+    - "Description"
+  bridge:
+    - "Brücke"
+    - "Bruecke"
+    - "Bridge"
+    - "Jumper"
+  device:
+    - "Gerät"
+    - "Geraet"
+    - "Device"
+    - "Typ"
+  access:
+    - "Zugang"
+    - "Access"
+    - "Anschlussart"
+
+akz_patterns:
+  - regex: "[A-Z]{2,4}\\s?[A-Z]?\\d+[./-]?[A-Za-z]?\\d+"
+    description: "Standard AKZ"
+  - regex: "^\\d+/[A-Z]\\d+"
+    description: "Phase designator (e.g. 1/L1)"
+
+ontology_mapping:
+  terminal_type_to_owl:
+    signal: "ievpi:SignalTerminal"
+    power: "ievpi:PowerTerminal"
+    ground: "ievpi:GroundTerminal"

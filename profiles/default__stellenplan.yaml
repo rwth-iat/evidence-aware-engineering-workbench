@@ -1,0 +1,68 @@
+# Default Stellenplan (PLT-Stellenplan / Messstellenplan) extraction profile.
+#
+# vendor: "default"
+# doc_type: "Stellenplan"
+
+vendor: default
+doc_type: Stellenplan
+description: "Default profile for Stellenplan / PLT-Stellenplan extraction (PDF / xlsx)"
+
+field_aliases:
+  akz:
+    - "AKZ"
+    - "PLT-Stelle"
+    - "Messstelle"
+    - "Tag"
+    - "Kennzeichen"
+    - "Stellenbezeichnung"
+  function:
+    - "Funktion"
+    - "Fkt"
+    - "Signalart"
+    - "Messart"
+    - "Function"
+  description:
+    - "Beschreibung"
+    - "Bezeichnung"
+    - "Benennung"
+    - "Description"
+    - "Kommentar"
+  device:
+    - "Gerät"
+    - "Geraet"
+    - "Device"
+    - "Typ"
+    - "Type"
+  manufacturer:
+    - "Hersteller"
+    - "Manufacturer"
+    - "Fabrikat"
+  signal_type:
+    - "Signal"
+    - "Signalart"
+    - "Signaltyp"
+    - "Messsignal"
+  process_connection:
+    - "Prozessanschluss"
+    - "ProcessConnection"
+    - "Anschluss"
+  power_supply:
+    - "Hilfsenergie"
+    - "Versorgung"
+    - "PowerSupply"
+  notes:
+    - "Bemerkung"
+    - "Hinweis"
+    - "Notes"
+    - "Kommentar"
+
+akz_patterns:
+  - regex: "[A-Z]{2,4}\\s?[A-Z]?\\d+[./-]?[A-Za-z]?\\d+"
+    description: "Standard AKZ"
+
+ontology_mapping:
+  stellen_type_to_owl:
+    sensor: "ievpi:Sensor"
+    actuator: "ievpi:Actuator"
+    transmitter: "ievpi:Transmitter"
+    controller: "ievpi:Controller"

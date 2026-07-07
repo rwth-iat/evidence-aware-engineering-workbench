@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<aas-template>
+  <shell id="{{shell_id}}" idShort="{{id_short}}_wiring">
+    <asset globalAssetId="{{asset_id}}" />
+    <submodelRef>{{submodel_id}}</submodelRef>
+  </shell>
+  <submodel id="{{submodel_id}}" idShort="WiringProposal">
+    <property idShort="pltStelle">{{plt_stelle}}</property>
+    <property idShort="canonicalTag">{{canonical_tag}}</property>
+    <property idShort="funktion">{{funktion}}</property>
+    <property idShort="beschreibung">{{beschreibung}}</property>
+    <property idShort="contextSummary">{{context_summary}}</property>
+    <property idShort="templateLanguage">{{ui_language}}</property>
+    <property idShort="templateDisplayName">{{template_display_name}}</property>
+    <property idShort="templateDisplayNameEn">{{template_display_name_en}}</property>
+    <property idShort="templateDisplayNameDe">{{template_display_name_de}}</property>
+    <property idShort="templateDisplayNameZh">{{template_display_name_zh}}</property>
+  </submodel>
+</aas-template>

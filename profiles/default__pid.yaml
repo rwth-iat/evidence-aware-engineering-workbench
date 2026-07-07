@@ -1,0 +1,120 @@
+# Default P&ID (R&I-Fliessbild) extraction profile.
+#
+# Used when no vendor-specific profile exists.
+# Maps common German and English field names to standardized template columns.
+#
+# vendor: "default"
+# doc_type: "PID"
+
+vendor: default
+doc_type: PID
+description: "Default profile for R&I P&ID extraction (DEXPI / PDF)"
+
+field_aliases:
+  # --- Equipment ---
+  equipment_class:
+    - "EquipmentClass"
+    - "ComponentClass"
+    - "Komponentenklasse"
+    - "Apparateart"
+  equipment_subclass:
+    - "EquipmentSubclass"
+    - "ComponentSubclass"
+  description:
+    - "Description"
+    - "Bezeichnung"
+    - "Benennung"
+    - "Komponente"
+  tag_name:
+    - "TagName"
+    - "Tag"
+    - "Kennzeichen"
+
+  # --- Instrumentation ---
+  pif_category:
+    - "ProcessInstrumentationFunctionCategory"
+    - "FunctionCategory"
+    - "Messgröße"
+  pif_modifier:
+    - "ProcessInstrumentationFunctionModifier"
+    - "FunctionModifier"
+  pif_number:
+    - "ProcessInstrumentationFunctionNumber"
+    - "FunctionNumber"
+    - "Nummer"
+  function:
+    - "Function"
+    - "Funktion"
+    - "Messart"
+  loop_id:
+    - "Loop_ID"
+    - "LoopId"
+    - "Regelkreis"
+
+  # --- Piping ---
+  pipe_class:
+    - "PipeClass"
+    - "Rohrklasse"
+    - "PipeSpec"
+    - "Specification"
+  nominal_diameter:
+    - "NominalDiameter"
+    - "DN"
+    - "Nennweite"
+    - "NW"
+    - "Diameter"
+  nominal_pressure:
+    - "NominalPressure"
+    - "PN"
+    - "Nenndruck"
+    - "PressureRating"
+  medium:
+    - "Medium"
+    - "Fluid"
+    - "Medium"
+
+akz_patterns:
+  - regex: "[A-Z]{2,4}\\s?[A-Z]?\\d+[./-]?[A-Za-z]?\\d+"
+    description: "Standard AKZ per DIN 19227-2"
+  - regex: "\\+[A-Z]?\\d+[./-]?[A-Z]?\\d+"
+    description: "AKZ with leading + prefix"
+
+# DEXPI → template field mapping (deterministic paths only)
+dexpi_field_targets:
+  ProcessInstrumentationFunction.ProcessInstrumentationFunctionNumber:
+    sheet: Instrumentation
+    column: AKZ
+  ProcessInstrumentationFunction.TagName:
+    sheet: Instrumentation
+    column: TagName
+  ProcessInstrumentationFunction.ProcessInstrumentationFunctionCategory:
+    sheet: Instrumentation
+    column: ProcessInstrumentationFunctionCategory
+  ProcessInstrumentationFunction.ProcessInstrumentationFunctionModifier:
+    sheet: Instrumentation
+    column: ProcessInstrumentationFunctionModifier
+  Equipment.Name:
+    sheet: Equipment
+    column: Description
+  Equipment.EquipmentClass:
+    sheet: Equipment
+    column: Equipment_Class
+  PipingComponent.NominalDiameter:
+    sheet: Piping
+    column: Nominal_Diameter
+  PipingComponent.PipeClass:
+    sheet: Piping
+    column: Pipe_Class
+
+ontology_mapping:
+  equipment_class_to_owl:
+    Vessel: "ievpi:Vessel"
+    Pump: "ievpi:Pump"
+    HeatExchanger: "ievpi:HeatExchanger"
+    Valve: "ievpi:Valve"
+    Tank: "ievpi:Tank"
+  pif_category_to_owl:
+    TI: "ievpi:TemperatureIndicator"
+    PI: "ievpi:PressureIndicator"
+    FI: "ievpi:FlowIndicator"
+    LI: "ievpi:LevelIndicator"

@@ -1,0 +1,94 @@
+{
+  "assetAdministrationShells": [
+    {
+      "modelType": "AssetAdministrationShell",
+      "id": "{{shell_id}}",
+      "idShort": "{{id_short}}_wiring",
+      "assetInformation": {
+        "assetKind": "Instance",
+        "globalAssetId": "{{asset_id}}"
+      },
+      "submodels": [
+        {
+          "type": "ModelReference",
+          "keys": [
+            {
+              "type": "Submodel",
+              "value": "{{submodel_id}}"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "submodels": [
+    {
+      "modelType": "Submodel",
+      "id": "{{submodel_id}}",
+      "idShort": "WiringProposal",
+      "submodelElements": [
+        {
+          "modelType": "Property",
+          "idShort": "pltStelle",
+          "valueType": "xs:string",
+          "value": "{{plt_stelle}}"
+        },
+        {
+          "modelType": "Property",
+          "idShort": "canonicalTag",
+          "valueType": "xs:string",
+          "value": "{{canonical_tag}}"
+        },
+        {
+          "modelType": "Property",
+          "idShort": "funktion",
+          "valueType": "xs:string",
+          "value": "{{funktion}}"
+        },
+        {
+          "modelType": "Property",
+          "idShort": "beschreibung",
+          "valueType": "xs:string",
+          "value": "{{beschreibung}}"
+        },
+        {
+          "modelType": "Property",
+          "idShort": "contextSummary",
+          "valueType": "xs:string",
+          "value": "{{context_summary}}"
+        },
+        {
+          "modelType": "Property",
+          "idShort": "templateLanguage",
+          "valueType": "xs:string",
+          "value": "{{ui_language}}"
+        },
+        {
+          "modelType": "Property",
+          "idShort": "templateDisplayName",
+          "valueType": "xs:string",
+          "value": "{{template_display_name}}"
+        },
+        {
+          "modelType": "Property",
+          "idShort": "templateDisplayNameEn",
+          "valueType": "xs:string",
+          "value": "{{template_display_name_en}}"
+        },
+        {
+          "modelType": "Property",
+          "idShort": "templateDisplayNameDe",
+          "valueType": "xs:string",
+          "value": "{{template_display_name_de}}"
+        },
+        {
+          "modelType": "Property",
+          "idShort": "templateDisplayNameZh",
+          "valueType": "xs:string",
+          "value": "{{template_display_name_zh}}"
+        }
+      ]
+    }
+  ],
+  "conceptDescriptions": []
+}

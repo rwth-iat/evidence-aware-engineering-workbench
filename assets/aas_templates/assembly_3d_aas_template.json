@@ -1,0 +1,73 @@
+{
+  "x-ievpi-source_type": "assembly_3d",
+  "assetAdministrationShells": [
+    {
+      "modelType": "AssetAdministrationShell",
+      "id": "{{shell_id}}",
+      "idShort": "{{id_short}}_assembly3d",
+      "assetInformation": {
+        "assetKind": "Instance",
+        "globalAssetId": "{{asset_id}}"
+      },
+      "submodels": [
+        {
+          "type": "ModelReference",
+          "keys": [
+            {
+              "type": "Submodel",
+              "value": "{{submodel_id}}"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "submodels": [
+    {
+      "modelType": "Submodel",
+      "id": "{{submodel_id}}",
+      "idShort": "Assembly3DComponent",
+      "submodelElements": [
+        {
+          "modelType": "SubmodelElementCollection",
+          "idShort": "AssetIdentity",
+          "value": [
+            {"modelType": "Property", "idShort": "assetId", "valueType": "xs:string", "value": "{{label}}"},
+            {"modelType": "Property", "idShort": "ifcGlobalId", "valueType": "xs:string", "value": "{{ifc_global_id}}"},
+            {"modelType": "Property", "idShort": "componentType", "valueType": "xs:string", "value": "{{type}}"}
+          ]
+        },
+        {
+          "modelType": "SubmodelElementCollection",
+          "idShort": "SpatialPose",
+          "value": [
+            {"modelType": "Property", "idShort": "positionX", "valueType": "xs:float", "value": "{{pos_x_mm}}"},
+            {"modelType": "Property", "idShort": "positionY", "valueType": "xs:float", "value": "{{pos_y_mm}}"},
+            {"modelType": "Property", "idShort": "positionZ", "valueType": "xs:float", "value": "{{pos_z_mm}}"},
+            {"modelType": "Property", "idShort": "rotationQW", "valueType": "xs:float", "value": "{{rot_qw}}"},
+            {"modelType": "Property", "idShort": "rotationQX", "valueType": "xs:float", "value": "{{rot_qx}}"},
+            {"modelType": "Property", "idShort": "rotationQY", "valueType": "xs:float", "value": "{{rot_qy}}"},
+            {"modelType": "Property", "idShort": "rotationQZ", "valueType": "xs:float", "value": "{{rot_qz}}"}
+          ]
+        },
+        {
+          "modelType": "SubmodelElementCollection",
+          "idShort": "FunctionalTraceability",
+          "value": [
+            {"modelType": "Property", "idShort": "akzTag", "valueType": "xs:string", "value": "{{akz_tag}}"},
+            {"modelType": "Property", "idShort": "vvTag", "valueType": "xs:string", "value": "{{vv_tag}}"}
+          ]
+        },
+        {
+          "modelType": "SubmodelElementCollection",
+          "idShort": "SourceEvidence",
+          "value": [
+            {"modelType": "Property", "idShort": "ifcPartsLibrary", "valueType": "xs:string", "value": "{{ifc_parts_library}}"},
+            {"modelType": "Property", "idShort": "ifcPartName", "valueType": "xs:string", "value": "{{ifc_part_name}}"},
+            {"modelType": "Property", "idShort": "fcstdLinkName", "valueType": "xs:string", "value": "{{fcstd_link_name}}"}
+          ]
+        }
+      ]
+    }
+  ]
+}

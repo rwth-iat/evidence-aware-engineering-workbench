@@ -1,0 +1,257 @@
+# Template Column Semantic Descriptions
+#
+# ONE-TIME hand-written file. Each column in the standardized Excel templates
+# gets a human-readable semantic description + canonical examples.
+#
+# Used by profile_generator.py as the "target schema" when an LLM drafts
+# a per-vendor profile. The LLM sees this file together with sample documents
+# and maps the vendor's field names to these standard columns.
+#
+# Also drives the field-alias matching in llm_agent.py at extraction time:
+# every field extracted from a document is matched against the aliases in
+# the active vendor profile; if no alias hits, the LLM compares the
+# extracted field against these descriptions to pick the right column.
+
+version: "1.0"
+
+templates:
+  PID_template:
+    sheets:
+      Equipment:
+        description: "Process equipment (vessels, pumps, heat exchangers, valves)"
+        columns:
+          AKZ:
+            description: "Anlagenkennzeichen / equipment tag per DIN 19227-2 / IEC 81346"
+            examples: ["TI TU10.T41", "PV TU20.Y30", "FIC 01.F10", "P01.B10"]
+            patterns: ["[A-Z]{2,4}\\s?[A-Z]?\\d+[./-]?[A-Za-z]?\\d+"]
+            unit: null
+          Equipment_Class:
+            description: "High-level equipment category from DEXPI / IEC 81346"
+            examples: ["Vessel", "Pump", "HeatExchanger", "Valve", "Tank"]
+            unit: null
+          Equipment_Subclass:
+            description: "Sub-classification, e.g. centrifugal vs. reciprocating pump"
+            examples: ["CentrifugalPump", "GateValve", "ShellAndTubeHE"]
+            unit: null
+          Description:
+            description: "Free-text equipment description from the source document"
+            examples: ["Feed water vessel", "Main circulation pump"]
+            unit: null
+          TagName:
+            description: "DEXPI TagName attribute if available; often same as AKZ"
+            examples: ["TU10.T41", "B10"]
+            unit: null
+
+      Instrumentation:
+        description: "Process instrumentation functions (sensors, transmitters, controllers)"
+        columns:
+          AKZ:
+            description: "Instrument AKZ / tag number"
+            examples: ["TI TU10.T41", "PI 01.F10", "FIC 02.Y30"]
+            patterns: ["[A-Z]{2,4}\\s?[A-Z]?\\d+[./-]?[A-Za-z]?\\d+"]
+            unit: null
+          ProcessInstrumentationFunctionCategory:
+            description: "Measured variable category per IEC 81346 (T, P, F, L, ...)"
+            examples: ["TI", "PI", "FI", "LI", "AI"]
+            unit: null
+          ProcessInstrumentationFunctionModifier:
+            description: "Function modifier letter (I=indicate, C=control, R=record, A=alarm, S=switch)"
+            examples: ["I", "C", "R", "A", "S", "IC", "IR"]
+            unit: null
+          ProcessInstrumentationFunctionNumber:
+            description: "Sequential loop number"
+            examples: ["T41", "F10", "Y30"]
+            unit: null
+          Function:
+            description: "Human-readable function description"
+            examples: ["Temperature measurement", "Pressure control", "Flow indication"]
+            unit: null
+          Loop_ID:
+            description: "Control loop identifier connecting sensor and actuator"
+            examples: ["L-TU10-T41", "F-01-F10"]
+            unit: null
+
+      Piping:
+        description: "Piping segments and their properties"
+        columns:
+          AKZ:
+            description: "Pipe line identifier"
+            examples: ["P-001-100-DN50", "L001"]
+            unit: null
+          Pipe_Class:
+            description: "Pipe class / specification code"
+            examples: ["1.1A1", "C1A", "B2"]
+            unit: null
+          Nominal_Diameter:
+            description: "Nominal pipe diameter in mm"
+            examples: ["DN100", "DN50", "100", "4 inch"]
+            unit: "mm"
+          Nominal_Pressure:
+            description: "Nominal pressure rating"
+            examples: ["PN16", "PN40", "Class 150", "10 bar"]
+            unit: null
+          Medium:
+            description: "Flowing medium / fluid"
+            examples: ["Water", "Steam", "N2", "Cooling water"]
+            unit: null
+
+  Datasheet_template:
+    sheets:
+      Device_ID:
+        description: "Device identity information"
+        columns:
+          AKZ:
+            description: "Device AKZ / tag number matching R&I instrumentation"
+            examples: ["TI TU10.T41", "PV TU20.Y30"]
+            unit: null
+          Manufacturer:
+            description: "Manufacturer / vendor name"
+            examples: ["SAMSON", "Endress+Hauser", "Siemens", "ABB"]
+            unit: null
+          Model:
+            description: "Manufacturer model / type designation"
+            examples: ["Type 3241", "Cerabar PMP51", "SITRANS P320"]
+            unit: null
+          Serial_Number:
+            description: "Device serial number"
+            examples: ["SN-12345678", "A1B2C3D4"]
+            unit: null
+          ECLASS_IRDI:
+            description: "ECLASS IRDI classification code"
+            examples: ["0173-1#01-AGZ123#004"]
+            unit: null
+
+      Process_Attributes:
+        description: "Process-related technical parameters"
+        columns:
+          Attribute_Name:
+            description: "Standard attribute name"
+            examples:
+              - "nominal_diameter"
+              - "nominal_pressure"
+              - "max_operating_temperature"
+              - "flow_coefficient_kv"
+              - "rangeability"
+            unit: null
+
+      Technical_Attributes:
+        description: "General technical specifications"
+        columns:
+          Attribute_Name:
+            description: "Standard attribute name"
+            examples:
+              - "body_material"
+              - "seat_material"
+              - "actuator_type"
+              - "failure_position"
+              - "supply_pressure"
+              - "signal_range"
+              - "protection_class"
+              - "explosion_protection"
+            unit: null
+
+      Geometric_Attributes:
+        description: "Physical dimensions and geometry"
+        columns:
+          Attribute_Name:
+            description: "Standard attribute name"
+            examples:
+              - "face_to_face_length"
+              - "overall_height"
+              - "flange_diameter"
+              - "weight"
+              - "connection_size"
+            unit: null
+
+      Connection_Attributes:
+        description: "Electrical and process connection details"
+        columns:
+          Connection_Type:
+            description: "Connection category"
+            examples: ["process", "electrical", "pneumatic", "signal"]
+            unit: null
+          Signal_Type:
+            description: "Analog / digital signal type"
+            examples: ["4-20mA", "HART", "0-10V", "Modbus", "Profibus PA"]
+            unit: null
+          Power_Supply:
+            description: "Power supply specification"
+            examples: ["24VDC", "230VAC", "loop-powered", "3x400VAC"]
+            unit: null
+          Bus_Protocol:
+            description: "Fieldbus / communication protocol"
+            examples: ["HART 7", "Profibus DP", "Foundation Fieldbus", "EtherNet/IP"]
+            unit: null
+
+# ---------------------------------------------------------------------------
+# Known vendor → field-name → canonical-column mapping examples.
+# Used as few-shot examples when profile_generator runs for a new vendor.
+# ---------------------------------------------------------------------------
+few_shot_examples:
+  - vendor: "SAMSON"
+    doc_type: "Datasheet"
+    mappings:
+      - vendor_field: "Nennweite"
+        canonical_column: "nominal_diameter"
+        sheet: "Process_Attributes"
+      - vendor_field: "NW"
+        canonical_column: "nominal_diameter"
+        sheet: "Process_Attributes"
+      - vendor_field: "Nenndruck"
+        canonical_column: "nominal_pressure"
+        sheet: "Process_Attributes"
+      - vendor_field: "PN"
+        canonical_column: "nominal_pressure"
+        sheet: "Process_Attributes"
+      - vendor_field: "Typ"
+        canonical_column: "Model"
+        sheet: "Device_ID"
+      - vendor_field: "Kvs-Wert"
+        canonical_column: "flow_coefficient_kv"
+        sheet: "Process_Attributes"
+      - vendor_field: "Max. Betriebstemperatur"
+        canonical_column: "max_operating_temperature"
+        sheet: "Process_Attributes"
+      - vendor_field: "Gehäusewerkstoff"
+        canonical_column: "body_material"
+        sheet: "Technical_Attributes"
+      - vendor_field: "Sitzwerkstoff"
+        canonical_column: "seat_material"
+        sheet: "Technical_Attributes"
+      - vendor_field: "Antriebstyp"
+        canonical_column: "actuator_type"
+        sheet: "Technical_Attributes"
+      - vendor_field: "Sicherheitsstellung"
+        canonical_column: "failure_position"
+        sheet: "Technical_Attributes"
+
+  - vendor: "Endress+Hauser"
+    doc_type: "Datasheet"
+    mappings:
+      - vendor_field: "Nominal Diameter"
+        canonical_column: "nominal_diameter"
+        sheet: "Process_Attributes"
+      - vendor_field: "Nominal Pressure"
+        canonical_column: "nominal_pressure"
+        sheet: "Process_Attributes"
+      - vendor_field: "Model / Type"
+        canonical_column: "Model"
+        sheet: "Device_ID"
+      - vendor_field: "Measuring Range"
+        canonical_column: "measurement_range"
+        sheet: "Process_Attributes"
+      - vendor_field: "Process Connection"
+        canonical_column: "connection_size"
+        sheet: "Geometric_Attributes"
+      - vendor_field: "Output Signal"
+        canonical_column: "Signal_Type"
+        sheet: "Connection_Attributes"
+      - vendor_field: "Supply Voltage"
+        canonical_column: "Power_Supply"
+        sheet: "Connection_Attributes"
+      - vendor_field: "Housing Material"
+        canonical_column: "body_material"
+        sheet: "Technical_Attributes"
+      - vendor_field: "Protection Class"
+        canonical_column: "protection_class"
+        sheet: "Technical_Attributes"

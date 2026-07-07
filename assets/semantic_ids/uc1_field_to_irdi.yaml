@@ -1,0 +1,535 @@
+# UC1 Field → IRDI / Semantic ID Mapping
+# ==========================================
+# Maps every AAS Submodel Property to a standard IRDI (ECLASS, IEC 61987 CDD,
+# or IDTA) for semanticId injection into generated AAS files.
+#
+# Sources:
+#   - ECLASS 14.0/15.0 (0173-1#02-...) — verified via eclass.eu content search
+#   - IEC 61987 CDD (0112/2///61987#...) — verified via cdd.iec.ch public database
+#   - IDTA Nameplate V1.0 (0112/2///61987#ABA000)
+#   - DEXPI 2.0 RDL — verified via https://sandbox.dexpi.org/rdl/
+#   - PCA RDL (ISO 15926) — verified via http://data.posccaesar.org/rdl/
+#   - IEV4PI-custom — research-specific concepts; marked CUSTOM
+#
+# CUSTOM markers indicate IEV4PI-specific concepts with no public standard IRDI.
+#
+# Format:
+#   <SubmodelName>:
+#     <PropertyName>:
+#       irdi: "<standard IRDI>"
+#       source: "<ECLASS | IEC_CDD | IDTA | DEXPI_RDL | IEV4PI_CUSTOM>"
+# ==========================================
+
+SM_CoreIdentity:
+  canonicalTag:
+    irdi: "0112/2///61987#ABA300#005"
+    source: "IEC_CDD"
+    note: "IEC 61987: code of product — unique combination of numbers and letters used to identify the device."
+  DeviceId:
+    irdi: "0112/2///61987#ABA292#006"
+    source: "IEC_CDD"
+    note: "IEC 61987: name of component manufacturer — used as device instance identifier."
+  hasInstrumentationLoopFunctionNumber:
+    irdi: "http://sandbox.dexpi.org/rdl/InstrumentationLoopFunction"
+    source: "DEXPI_RDL"
+    note: "DEXPI 2.0: InstrumentationLoopFunction. An identified collection of related PROCESS CONTROL REQUIREMENTs."
+  ProcessInstrumentationFunctionNumber:
+    irdi: "http://sandbox.dexpi.org/rdl/ProcessInstrumentationFunction"
+    source: "DEXPI_RDL"
+    note: "DEXPI 2.0 NE 159: ProcessInstrumentationFunction. A requirement for instrumentation and/or control structures."
+  ProcessInstrumentationFunctionCategory:
+    irdi: "http://sandbox.dexpi.org/rdl/ProcessInstrumentationFunction"
+    source: "DEXPI_RDL"
+    note: "DEXPI 2.0: ProcessInstrumentationFunction category (IEC 81346-1 function letters)."
+  ProcessInstrumentationFunctionModifier:
+    irdi: "http://sandbox.dexpi.org/rdl/ProcessInstrumentationFunction"
+    source: "DEXPI_RDL"
+    note: "DEXPI 2.0: ProcessInstrumentationFunction modifier (e.g., T41, Y30)."
+  ProcessInstrumentationFunctions:
+    irdi: "http://sandbox.dexpi.org/rdl/ProcessInstrumentationFunction"
+    source: "DEXPI_RDL"
+    note: "DEXPI 2.0: Aggregated function description."
+  ContextSummary:
+    irdi: "urn:ievpi:semantic:ContextSummary"
+    source: "IEV4PI_CUSTOM"
+    note: "Human-readable context summary of the device in the plant. IEV4PI-specific."
+  XSDStatus:
+    irdi: "urn:ievpi:semantic:XSDStatus"
+    source: "IEV4PI_CUSTOM"
+    note: "DEXPI XSD validation status (present/missing/conflict). IEV4PI-specific."
+
+SM_FunctionAndVendor:
+  DeviceInformation:
+    irdi: "0173-1#02-AAO857#002"
+    source: "ECLASS"
+    note: "ECLASS 0173-1#02-AAO857#002: manufacturer product designation."
+  VendorCompanyName:
+    irdi: "0173-1#02-AAO677#002"
+    source: "ECLASS"
+    note: "ECLASS 0173-1#02-AAO677#002: manufacturer name."
+  SafetyRelevanceClass:
+    irdi: "http://sandbox.dexpi.org/rdl/ProcessInstrumentationFunction"
+    source: "DEXPI_RDL"
+    note: "Safety integrity level (SIL) per IEC 61508/61511 — associated with the PIF."
+  LabelText:
+    irdi: "urn:ievpi:semantic:LabelText"
+    source: "IEV4PI_CUSTOM"
+    note: "Label text displayed on the device / in diagrams."
+  FunctionCode:
+    irdi: "0112/2///61987#ABA300#005"
+    source: "IEC_CDD"
+    note: "IEC 61987: code of product — function code per IEC 81346-1."
+  SourceDocument:
+    irdi: "urn:ievpi:semantic:SourceDocument"
+    source: "IEV4PI_CUSTOM"
+    note: "Source document identifier for provenance tracking. IEV4PI-specific."
+  SourceLocator:
+    irdi: "urn:ievpi:semantic:SourceLocator"
+    source: "IEV4PI_CUSTOM"
+    note: "Source document locator (e.g., page/row reference). IEV4PI-specific."
+  DexpiClass:
+    irdi: "http://sandbox.dexpi.org/rdl/ProcessInstrumentationFunction"
+    source: "DEXPI_RDL"
+    note: "DEXPI 2.0 component class (e.g., OperatedValve, Vessel) — specialization of PIF."
+  DexpiSubClass:
+    irdi: "http://sandbox.dexpi.org/rdl/ProcessControlFunction"
+    source: "DEXPI_RDL"
+    note: "DEXPI 2.0: ProcessControlFunction — subclass of ProcessInstrumentationFunction."
+  RISourceDocument:
+    irdi: "urn:ievpi:semantic:RISourceDocument"
+    source: "IEV4PI_CUSTOM"
+    note: "R&I source document for provenance. IEV4PI-specific."
+  RILocator:
+    irdi: "urn:ievpi:semantic:RILocator"
+    source: "IEV4PI_CUSTOM"
+    note: "R&I source locator. IEV4PI-specific."
+
+SM_ActuationAndPiping:
+  ActuatingFunctionNumber:
+    irdi: "http://sandbox.dexpi.org/rdl/ActuatingSystem"
+    source: "DEXPI_RDL"
+    note: "DEXPI 2.0: ActuatingSystem — an assembly of artefacts that fulfills an ACTING PROCESS CONTROL REQUIREMENT."
+  ActuatingLocation:
+    irdi: "0112/2///61987#ABU458#005"
+    source: "IEC_CDD"
+    note: "IEC 61987: Process connection / end connection — physical location context."
+  ActuatingSystemNumber:
+    irdi: "http://sandbox.dexpi.org/rdl/ActuatingSystem"
+    source: "DEXPI_RDL"
+    note: "DEXPI 2.0: ActuatingSystem identifier."
+  OperatedValveReference:
+    irdi: "http://sandbox.dexpi.org/rdl/ActuatingSystem"
+    source: "DEXPI_RDL"
+    note: "DEXPI 2.0: Reference to the operated valve component within ActuatingSystem."
+  FlowDirection:
+    irdi: "urn:ievpi:semantic:FlowDirection"
+    source: "IEV4PI_CUSTOM"
+    note: "Flow direction (forward, reverse, bidirectional). Plant-specific concept."
+  NominalDiameterNumericalValueRepresentation:
+    irdi: "0112/2///61987#ABB961#001"
+    source: "IEC_CDD"
+    note: "IEC 61987: size of orifice — internal diameter in mm."
+  NominalDiameterRepresentation:
+    irdi: "0112/2///61987#ABB961#001"
+    source: "IEC_CDD"
+    note: "IEC 61987: size of orifice — nominal diameter as string (e.g., DN80)."
+  NominalDiameterStandard:
+    irdi: "0112/2///61987#ABD703#003"
+    source: "IEC_CDD"
+    note: "IEC 61987: reference standard for valve — standard on which the design is based."
+  NominalDiameterTypeRepresentation:
+    irdi: "urn:ievpi:semantic:NominalDiameterType"
+    source: "IEV4PI_CUSTOM"
+    note: "Type of nominal diameter representation (DN, NPS, etc.)."
+  LineNumber:
+    irdi: "urn:ievpi:semantic:LineNumber"
+    source: "IEV4PI_CUSTOM"
+    note: "Piping line number per plant labeling system."
+  PipingComponentName:
+    irdi: "http://sandbox.dexpi.org/rdl/ActuatingSystem"
+    source: "DEXPI_RDL"
+    note: "DEXPI 2.0: Piping component associated with ActuatingSystem."
+  FromEquipmentId:
+    irdi: "urn:ievpi:semantic:FromEquipmentId"
+    source: "IEV4PI_CUSTOM"
+    note: "Upstream equipment reference (DEXPI connection topology). IEV4PI-specific."
+  ToEquipmentId:
+    irdi: "urn:ievpi:semantic:ToEquipmentId"
+    source: "IEV4PI_CUSTOM"
+    note: "Downstream equipment reference (DEXPI connection topology). IEV4PI-specific."
+  PipingAnchorId:
+    irdi: "urn:ievpi:semantic:PipingAnchorId"
+    source: "IEV4PI_CUSTOM"
+    note: "DEXPI 2.0: PipingNetworkSegment anchor identifier. IEV4PI-specific."
+  RecommendedAction:
+    irdi: "urn:ievpi:semantic:RecommendedAction"
+    source: "IEV4PI_CUSTOM"
+    note: "Recommended action for data completion. IEV4PI-specific."
+
+SM_IFCConnectivity:
+  canonicalTag:
+    irdi: "0112/2///61987#ABA300#005"
+    source: "IEC_CDD"
+    note: "IEC 61987: code of product. Used in piping source type."
+  DeviceId:
+    irdi: "0112/2///61987#ABA292#006"
+    source: "IEC_CDD"
+    note: "IEC 61987: name of component manufacturer. Used in piping source type."
+  EntryId:
+    irdi: "urn:ievpi:semantic:EntryId"
+    source: "IEV4PI_CUSTOM"
+    note: "Unique piping entry identifier. Used in piping source type."
+  FlangeComplete:
+    irdi: "urn:ievpi:semantic:FlangeComplete"
+    source: "IEV4PI_CUSTOM"
+    note: "Whether flange data is complete. Used in piping source type."
+  PresenceStatus:
+    irdi: "urn:ievpi:semantic:PresenceStatus"
+    source: "IEV4PI_CUSTOM"
+    note: "Presence status (present/missing). Used in piping source type."
+  IFCClass:
+    irdi: "https://standards.buildingsmart.org/IFC/DEV/IFC4_2/"
+    source: "buildingSMART"
+    note: "IFC entity class per ISO 16739-1 (e.g., IfcPipeSegment, IfcValve)."
+  GlobalId:
+    irdi: "https://standards.buildingsmart.org/IFC/DEV/IFC4_2/"
+    source: "buildingSMART"
+    note: "IFC GlobalId (UUID) per ISO 16739-1."
+  Tag:
+    irdi: "https://standards.buildingsmart.org/IFC/DEV/IFC4_2/"
+    source: "buildingSMART"
+    note: "IFC Tag attribute per ISO 16739-1."
+  HasPorts:
+    irdi: "https://standards.buildingsmart.org/IFC/DEV/IFC4_2/"
+    source: "buildingSMART"
+    note: "Whether the IFC element has port connections (IfcRelConnectsPortToElement)."
+  ConnectedTo:
+    irdi: "https://standards.buildingsmart.org/IFC/DEV/IFC4_2/"
+    source: "buildingSMART"
+    note: "Downstream IFC connection references (IfcRelConnectsElements)."
+  ConnectedFrom:
+    irdi: "https://standards.buildingsmart.org/IFC/DEV/IFC4_2/"
+    source: "buildingSMART"
+    note: "Upstream IFC connection references (IfcRelConnectsElements)."
+  HasControlElements:
+    irdi: "https://standards.buildingsmart.org/IFC/DEV/IFC4_2/"
+    source: "buildingSMART"
+    note: "Associated control elements (IfcRelFlowControlElements)."
+  PredefinedType:
+    irdi: "https://standards.buildingsmart.org/IFC/DEV/IFC4_2/"
+    source: "buildingSMART"
+    note: "IFC PredefinedType enumeration value per ISO 16739-1."
+  Size:
+    irdi: "0112/2///61987#ABB961#001"
+    source: "IEC_CDD"
+    note: "IEC 61987: size of orifice — physical size from IFC model."
+  ValveMechanism:
+    irdi: "http://sandbox.dexpi.org/rdl/ActuatingSystem"
+    source: "DEXPI_RDL"
+    note: "Valve mechanism type (ball, gate, globe, etc.) — part of ActuatingSystem."
+  FlowCoefficient:
+    irdi: "urn:ievpi:semantic:FlowCoefficient"
+    source: "IEV4PI_CUSTOM"
+    note: "Flow coefficient (Kv / Cv). IEV4PI-specific."
+  FailPosition:
+    irdi: "0112/2///61987#ABE648#002"
+    source: "IEC_CDD"
+    note: "IEC 61987: fail-safe position — position of a valve in de-energized state."
+  ManualOverride:
+    irdi: "urn:ievpi:semantic:ManualOverride"
+    source: "IEV4PI_CUSTOM"
+    note: "Manual override capability. IEV4PI-specific."
+  ActuatorApplication:
+    irdi: "http://sandbox.dexpi.org/rdl/ActuatingSystem"
+    source: "DEXPI_RDL"
+    note: "Actuator application type — part of ActuatingSystem."
+  IFCSourceDocument:
+    irdi: "urn:ievpi:semantic:IFCSourceDocument"
+    source: "IEV4PI_CUSTOM"
+    note: "Source IFC file identifier. IEV4PI-specific."
+  IFCLocator:
+    irdi: "urn:ievpi:semantic:IFCLocator"
+    source: "IEV4PI_CUSTOM"
+    note: "Locator within the IFC source file. IEV4PI-specific."
+
+SM_CompletionProposal:
+  PresentInRI:
+    irdi: "urn:ievpi:semantic:PRESENT-RI"
+    source: "IEV4PI_CUSTOM"
+    note: "Whether the device is present in the R&I (P&ID). IEV4PI UC1-specific."
+  PresentInStellenplan:
+    irdi: "urn:ievpi:semantic:PRESENT-SP"
+    source: "IEV4PI_CUSTOM"
+    note: "Whether the device is present in the instrument list (Stellenplan). IEV4PI UC1-specific."
+  PresentInWiring:
+    irdi: "urn:ievpi:semantic:PRESENT-WR"
+    source: "IEV4PI_CUSTOM"
+    note: "Whether the device is present in the wiring plan. IEV4PI UC1-specific."
+  PresentInDatasheet:
+    irdi: "urn:ievpi:semantic:PRESENT-DS"
+    source: "IEV4PI_CUSTOM"
+    note: "Whether the device has a datasheet. IEV4PI UC1-specific."
+  PresentInIFC:
+    irdi: "urn:ievpi:semantic:PRESENT-IFC"
+    source: "IEV4PI_CUSTOM"
+    note: "Whether the device is present in the 3D model. IEV4PI UC1-specific."
+  FlangeComplete:
+    irdi: "urn:ievpi:semantic:FLANGE-COMP"
+    source: "IEV4PI_CUSTOM"
+    note: "Whether flange data is complete. IEV4PI-specific."
+  UC1Candidate:
+    irdi: "urn:ievpi:semantic:UC1-CAND"
+    source: "IEV4PI_CUSTOM"
+    note: "Whether this device is a UC1 candidate for completion. IEV4PI-specific."
+  MissingTargets:
+    irdi: "urn:ievpi:semantic:MISSING-TGT"
+    source: "IEV4PI_CUSTOM"
+    note: "List of missing document targets. IEV4PI UC1-specific."
+  RecommendedAction:
+    irdi: "urn:ievpi:semantic:REC-ACT"
+    source: "IEV4PI_CUSTOM"
+    note: "Recommended action for resolving incompleteness. IEV4PI-specific."
+  ProposalStatus:
+    irdi: "urn:ievpi:semantic:PROP-STAT"
+    source: "IEV4PI_CUSTOM"
+    note: "Status of the completion proposal. IEV4PI-specific."
+  StellenplanSourceDocument:
+    irdi: "urn:ievpi:semantic:SP-SRC-DOC"
+    source: "IEV4PI_CUSTOM"
+    note: "Source instrument list document. IEV4PI-specific."
+  StellenplanLocator:
+    irdi: "urn:ievpi:semantic:SP-SRC-LOC"
+    source: "IEV4PI_CUSTOM"
+    note: "Locator within the instrument list document. IEV4PI-specific."
+  WiringSourceDocument:
+    irdi: "urn:ievpi:semantic:WR-SRC-DOC"
+    source: "IEV4PI_CUSTOM"
+    note: "Source wiring plan document. IEV4PI-specific."
+  WiringLocator:
+    irdi: "urn:ievpi:semantic:WR-SRC-LOC"
+    source: "IEV4PI_CUSTOM"
+    note: "Locator within the wiring plan document. IEV4PI-specific."
+  DatasheetSourceDocument:
+    irdi: "urn:ievpi:semantic:DS-SRC-DOC"
+    source: "IEV4PI_CUSTOM"
+    note: "Source datasheet document. IEV4PI-specific."
+  DatasheetLocator:
+    irdi: "urn:ievpi:semantic:DS-SRC-LOC"
+    source: "IEV4PI_CUSTOM"
+    note: "Locator within the datasheet document. IEV4PI-specific."
+  Confidence:
+    irdi: "urn:ievpi:semantic:Confidence"
+    source: "IEV4PI_CUSTOM"
+    note: "Extraction confidence score. Used in non-pid source types under SM_CompletionProposal."
+  NeedsReview:
+    irdi: "urn:ievpi:semantic:NeedsReview"
+    source: "IEV4PI_CUSTOM"
+    note: "Flag indicating human review is needed. Used in non-pid source types."
+  SourceDocument:
+    irdi: "urn:ievpi:semantic:SourceDocument"
+    source: "IEV4PI_CUSTOM"
+    note: "Source document identifier for provenance. Used in non-pid source types."
+  SourceLocator:
+    irdi: "urn:ievpi:semantic:SourceLocator"
+    source: "IEV4PI_CUSTOM"
+    note: "Source document locator for provenance. Used in non-pid source types."
+
+SM_Traceability:
+  DecisionConfidence:
+    irdi: "urn:ievpi:semantic:DEC-CONF"
+    source: "IEV4PI_CUSTOM"
+    note: "Confidence score for the extraction decision. IEV4PI-specific."
+  EvidenceBundleId:
+    irdi: "urn:ievpi:semantic:EVID-BUNDLE"
+    source: "IEV4PI_CUSTOM"
+    note: "Identifier linking to the evidence graph bundle. IEV4PI-specific."
+  UncertaintyReason:
+    irdi: "urn:ievpi:semantic:UNCERT-REASON"
+    source: "IEV4PI_CUSTOM"
+    note: "Reason for uncertainty in the extraction result. IEV4PI-specific."
+  LLMVerificationStatus:
+    irdi: "urn:ievpi:semantic:LLM-VERIFY"
+    source: "IEV4PI_CUSTOM"
+    note: "Status of LLM-based verification. IEV4PI-specific."
+  RuleSupport:
+    irdi: "urn:ievpi:semantic:RULE-SUPPORT"
+    source: "IEV4PI_CUSTOM"
+    note: "Rule support indicator for the extraction. IEV4PI-specific."
+  ReviewFeedbackStatus:
+    irdi: "urn:ievpi:semantic:REVIEW-FB"
+    source: "IEV4PI_CUSTOM"
+    note: "Human review feedback status. IEV4PI-specific."
+  DecisionTrace:
+    irdi: "urn:ievpi:semantic:DEC-TRACE"
+    source: "IEV4PI_CUSTOM"
+    note: "Trace of the decision process (JSON). IEV4PI-specific."
+  ProposalStatus:
+    irdi: "urn:ievpi:semantic:PROP-STAT"
+    source: "IEV4PI_CUSTOM"
+    note: "Status of the completion proposal (pid source type). IEV4PI-specific."
+  RecommendedAction:
+    irdi: "urn:ievpi:semantic:REC-ACT"
+    source: "IEV4PI_CUSTOM"
+    note: "Recommended action (pid source type). IEV4PI-specific."
+  SourceDocument:
+    irdi: "urn:ievpi:semantic:SRC-DOC"
+    source: "IEV4PI_CUSTOM"
+    note: "Source engineering document for provenance. IEV4PI-specific."
+  SourceLocator:
+    irdi: "urn:ievpi:semantic:SRC-LOC"
+    source: "IEV4PI_CUSTOM"
+    note: "Location within the source document. IEV4PI-specific."
+  Confidence:
+    irdi: "urn:ievpi:semantic:CONFIDENCE"
+    source: "IEV4PI_CUSTOM"
+    note: "Extraction confidence score. IEV4PI-specific."
+  NeedsReview:
+    irdi: "urn:ievpi:semantic:NEEDS-REVIEW"
+    source: "IEV4PI_CUSTOM"
+    note: "Flag indicating human review is needed. IEV4PI-specific."
+  MissingTargets:
+    irdi: "urn:ievpi:semantic:MISS-TGT"
+    source: "IEV4PI_CUSTOM"
+    note: "Missing document targets. IEV4PI-specific."
+
+# IDTA Digital Nameplate Submodel (IEC 61987 + ECLASS)
+# IDTA Nameplate semanticId: 0112/2///61987#ABA000
+# or: https://admin-shell.io/idta/Nameplate/1/0/Submodel
+Nameplate:
+  ManufacturerName:
+    irdi: "0173-1#02-AAO677#002"
+    source: "ECLASS"
+    note: "ECLASS 0173-1#02-AAO677#002. IEC 61987: 0112/2///61987#ABA292#006. IDTA Nameplate."
+  ManufacturerProductDesignation:
+    irdi: "0173-1#02-AAO857#002"
+    source: "ECLASS"
+    note: "ECLASS 0173-1#02-AAO857#002. IEC 61987: 0112/2///61987#ABA300#005. IDTA Nameplate."
+  SerialNumber:
+    irdi: "0173-1#02-AAO753#002"
+    source: "ECLASS"
+    note: "ECLASS 0173-1#02-AAO753#002. IDTA Nameplate."
+  ManufacturerProductFamily:
+    irdi: "0173-1#02-AAO742#002"
+    source: "ECLASS"
+    note: "ECLASS 0173-1#02-AAO742#002: Brand. Used as Product Family per IDTA Nameplate."
+
+# --- Per-source-type entry submodels ---
+
+SM_InstrumentListEntry:
+  EntryId:
+    irdi: "urn:ievpi:semantic:EntryId"
+    source: "IEV4PI_CUSTOM"
+    note: "Unique instrument list entry identifier."
+  DeviceId:
+    irdi: "0112/2///61987#ABA292#006"
+    source: "IEC_CDD"
+    note: "IEC 61987: name of component manufacturer."
+  canonicalTag:
+    irdi: "0112/2///61987#ABA300#005"
+    source: "IEC_CDD"
+    note: "IEC 61987: code of product."
+  Tag:
+    irdi: "0112/2///61987#ABA300#005"
+    source: "IEC_CDD"
+    note: "IEC 61987: code of product — tag identifier."
+  DeviceInformation:
+    irdi: "0173-1#02-AAO857#002"
+    source: "ECLASS"
+    note: "ECLASS 0173-1#02-AAO857#002: manufacturer product designation."
+  DisplayName:
+    irdi: "urn:ievpi:semantic:DisplayName"
+    source: "IEV4PI_CUSTOM"
+    note: "Human-readable display name for the instrument."
+  PresenceStatus:
+    irdi: "urn:ievpi:semantic:PresenceStatus"
+    source: "IEV4PI_CUSTOM"
+    note: "Presence status (present/missing/partial) for the instrument list entry."
+
+SM_WiringEntry:
+  EntryId:
+    irdi: "urn:ievpi:semantic:EntryId"
+    source: "IEV4PI_CUSTOM"
+    note: "Unique wiring entry identifier."
+  DeviceId:
+    irdi: "0112/2///61987#ABA292#006"
+    source: "IEC_CDD"
+    note: "IEC 61987: name of component manufacturer."
+  canonicalTag:
+    irdi: "0112/2///61987#ABA300#005"
+    source: "IEC_CDD"
+    note: "IEC 61987: code of product."
+  PLTStelle:
+    irdi: "http://sandbox.dexpi.org/rdl/ProcessInstrumentationFunction"
+    source: "DEXPI_RDL"
+    note: "DEXPI 2.0: PLT-Stelle mapped to ProcessInstrumentationFunction."
+  Funktion:
+    irdi: "0112/2///61987#ABA300#005"
+    source: "IEC_CDD"
+    note: "IEC 61987: code of product — function designation."
+  Beschreibung:
+    irdi: "0173-1#02-AAO857#002"
+    source: "ECLASS"
+    note: "ECLASS 0173-1#02-AAO857#002: description / product designation."
+  ESchrank:
+    irdi: "urn:ievpi:semantic:ESchrank"
+    source: "IEV4PI_CUSTOM"
+    note: "Electrical cabinet identifier (E-Schrank). Plant-specific."
+  WireLabel:
+    irdi: "urn:ievpi:semantic:WireLabel"
+    source: "IEV4PI_CUSTOM"
+    note: "Wire label / terminal designation."
+  PresenceStatus:
+    irdi: "urn:ievpi:semantic:PresenceStatus"
+    source: "IEV4PI_CUSTOM"
+    note: "Presence status (present/missing) for the wiring entry."
+
+SM_DatasheetEntry:
+  EntryId:
+    irdi: "urn:ievpi:semantic:EntryId"
+    source: "IEV4PI_CUSTOM"
+    note: "Unique datasheet entry identifier."
+  DeviceId:
+    irdi: "0112/2///61987#ABA292#006"
+    source: "IEC_CDD"
+    note: "IEC 61987: name of component manufacturer."
+  canonicalTag:
+    irdi: "0112/2///61987#ABA300#005"
+    source: "IEC_CDD"
+    note: "IEC 61987: code of product."
+  Tag:
+    irdi: "0112/2///61987#ABA300#005"
+    source: "IEC_CDD"
+    note: "IEC 61987: code of product — tag identifier."
+  DeviceInformation:
+    irdi: "0173-1#02-AAO857#002"
+    source: "ECLASS"
+    note: "ECLASS 0173-1#02-AAO857#002: manufacturer product designation."
+  Art:
+    irdi: "urn:ievpi:semantic:Art"
+    source: "IEV4PI_CUSTOM"
+    note: "Article type / device category (Art)."
+  Kanal:
+    irdi: "urn:ievpi:semantic:Kanal"
+    source: "IEV4PI_CUSTOM"
+    note: "Channel designation (Kanal) per datasheet."
+  YP:
+    irdi: "urn:ievpi:semantic:YP"
+    source: "IEV4PI_CUSTOM"
+    note: "Measuring point identifier (YP / Messstelle)."
+  Position:
+    irdi: "urn:ievpi:semantic:Position"
+    source: "IEV4PI_CUSTOM"
+    note: "Position / location code in the plant."
+  Address:
+    irdi: "urn:ievpi:semantic:Address"
+    source: "IEV4PI_CUSTOM"
+    note: "Bus address / device address."
+  Project:
+    irdi: "urn:ievpi:semantic:Project"
+    source: "IEV4PI_CUSTOM"
+    note: "Project identifier / plant designation."
+  PresenceStatus:
+    irdi: "urn:ievpi:semantic:PresenceStatus"
+    source: "IEV4PI_CUSTOM"
+    note: "Presence status (present/missing) for the datasheet entry."
+

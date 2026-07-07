@@ -1,0 +1,77 @@
+{
+  "_description": "IDTA Digital Nameplate Submodel Template (V1.0). IRDI: 0112/2///61987#ABA000. semanticId: https://admin-shell.io/idta/Nameplate/1/0/Submodel",
+  "_note": "This is a structural reference template. The actual AAS generation uses Tx rule specs in tx/defaults.py.",
+  "modelType": "Submodel",
+  "idShort": "Nameplate",
+  "semanticId": {
+    "type": "ExternalReference",
+    "keys": [
+      {
+        "type": "GlobalReference",
+        "value": "0112/2///61987#ABA000"
+      }
+    ]
+  },
+  "submodelElements": [
+    {
+      "modelType": "Property",
+      "idShort": "ManufacturerName",
+      "valueType": "xs:string",
+      "semanticId": {
+        "type": "ExternalReference",
+        "keys": [
+          {
+            "type": "GlobalReference",
+            "value": "0173-1#02-AAO677#002"
+          }
+        ]
+      },
+      "_mappedFrom": "vendor_company_name"
+    },
+    {
+      "modelType": "Property",
+      "idShort": "ManufacturerProductDesignation",
+      "valueType": "xs:string",
+      "semanticId": {
+        "type": "ExternalReference",
+        "keys": [
+          {
+            "type": "GlobalReference",
+            "value": "0173-1#02-AAO857#002"
+          }
+        ]
+      },
+      "_mappedFrom": "device_information"
+    },
+    {
+      "modelType": "Property",
+      "idShort": "SerialNumber",
+      "valueType": "xs:string",
+      "semanticId": {
+        "type": "ExternalReference",
+        "keys": [
+          {
+            "type": "GlobalReference",
+            "value": "0173-1#02-AAO753#002"
+          }
+        ]
+      },
+      "_mappedFrom": "serial_number"
+    },
+    {
+      "modelType": "Property",
+      "idShort": "ManufacturerProductFamily",
+      "valueType": "xs:string",
+      "semanticId": {
+        "type": "ExternalReference",
+        "keys": [
+          {
+            "type": "GlobalReference",
+            "value": "0173-1#02-AAO742#002"
+          }
+        ]
+      },
+      "_mappedFrom": "product_family"
+    }
+  ]
+}

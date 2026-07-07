@@ -1,0 +1,212 @@
+# Default Datasheet extraction profile.
+#
+# vendor: "default"
+# doc_type: "Datasheet"
+
+vendor: default
+doc_type: Datasheet
+description: "Default profile for device datasheet extraction (PDF / xlsx)"
+
+field_aliases:
+  # --- Device_ID ---
+  manufacturer:
+    - "Manufacturer"
+    - "Hersteller"
+    - "Vendor"
+    - "Fabrikat"
+  model:
+    - "Model"
+    - "Type"
+    - "Typ"
+    - "Gerätetyp"
+    - "Modell"
+    - "Type Designation"
+  serial_number:
+    - "SerialNumber"
+    - "Serial No"
+    - "Seriennummer"
+    - "S/N"
+    - "Ser No"
+  eclass_irdi:
+    - "ECLASS_IRDI"
+    - "ECLASS"
+    - "IRDI"
+
+  # --- Process_Attributes ---
+  nominal_diameter:
+    - "NominalDiameter"
+    - "DN"
+    - "Nennweite"
+    - "NW"
+    - "Diameter"
+    - "Nenndurchmesser"
+  nominal_pressure:
+    - "NominalPressure"
+    - "PN"
+    - "Nenndruck"
+    - "PressureRating"
+    - "Druckstufe"
+  max_operating_temperature:
+    - "MaxOperatingTemperature"
+    - "MaxTemp"
+    - "Max. Betriebstemperatur"
+    - "Tmax"
+    - "zul. Betriebstemperatur"
+  max_operating_pressure:
+    - "MaxOperatingPressure"
+    - "MaxPressure"
+    - "Max. Betriebsdruck"
+    - "Pmax"
+  flow_coefficient_kv:
+    - "Kv"
+    - "Kvs"
+    - "Kvs-Wert"
+    - "FlowCoefficient"
+    - "Cv"
+  measurement_range:
+    - "MeasurementRange"
+    - "Messbereich"
+    - "Range"
+    - "Messspanne"
+  rangeability:
+    - "Rangeability"
+    - "Stellverhältnis"
+    - "TurnDown"
+
+  # --- Technical_Attributes ---
+  body_material:
+    - "BodyMaterial"
+    - "Gehäusewerkstoff"
+    - "HousingMaterial"
+    - "Material"
+  seat_material:
+    - "SeatMaterial"
+    - "Sitzwerkstoff"
+    - "Sitzmaterial"
+  actuator_type:
+    - "ActuatorType"
+    - "Antriebstyp"
+    - "Antriebsart"
+  failure_position:
+    - "FailurePosition"
+    - "Sicherheitsstellung"
+    - "FailSafe"
+    - "Ruhestellung"
+  supply_pressure:
+    - "SupplyPressure"
+    - "Zuluftdruck"
+    - "Hilfsenergie"
+    - "Supply"
+  signal_range:
+    - "SignalRange"
+    - "Signalbereich"
+    - "Eingangssignal"
+    - "OutputSignal"
+  protection_class:
+    - "ProtectionClass"
+    - "Schutzart"
+    - "IP"
+    - "NEMA"
+  explosion_protection:
+    - "ExplosionProtection"
+    - "Ex-Schutz"
+    - "ATEX"
+    - "IECEx"
+
+  # --- Geometric_Attributes ---
+  face_to_face_length:
+    - "FaceToFaceLength"
+    - "Baulänge"
+    - "FFL"
+    - "Einbaulänge"
+  overall_height:
+    - "OverallHeight"
+    - "Bauhöhe"
+    - "Height"
+    - "Höhe"
+  flange_diameter:
+    - "FlangeDiameter"
+    - "Flanschdurchmesser"
+    - "FlangeSize"
+  weight:
+    - "Weight"
+    - "Gewicht"
+    - "Masse"
+
+  # --- Connection_Attributes ---
+  connection_type:
+    - "ConnectionType"
+    - "Anschlussart"
+    - "Connection"
+  signal_type:
+    - "SignalType"
+    - "Signalart"
+    - "Ausgangssignal"
+    - "Output"
+  power_supply:
+    - "PowerSupply"
+    - "Hilfsenergie"
+    - "Versorgung"
+    - "SupplyVoltage"
+  bus_protocol:
+    - "BusProtocol"
+    - "Busprotokoll"
+    - "Fieldbus"
+    - "Kommunikation"
+
+  # --- Device_ID document-meta extensions (German TU fields) ---
+  art:
+    - "Art"
+    - "Type"
+    - "Typ"
+    - "Gerätetyp"
+    - "DeviceType"
+  kanal:
+    - "Kanal"
+    - "Channel"
+  adresse:
+    - "Adresse"
+    - "Address"
+    - "Busadresse"
+  position:
+    - "Position"
+    - "Einbauposition"
+    - "Location"
+
+  # --- Document_Data extensions ---
+  projekt:
+    - "Projekt"
+    - "Project"
+    - "Anlage"
+    - "Plant"
+  bearb:
+    - "Bearb"
+    - "Bearbeiter"
+    - "Editor"
+    - "EditedBy"
+  erstellt:
+    - "Erstellt"
+    - "Created"
+    - "Erstellungsdatum"
+    - "DateOfCreation"
+  prozesstechnik_kunde:
+    - "ProzesstechnikKunde"
+    - "Prozesstechnik Kunde"
+    - "ProcessCustomer"
+    - "Endkunde"
+  connections:
+    - "Connections"
+    - "Anschlüsse"
+    - "Terminals"
+
+akz_patterns:
+  - regex: "[A-Z]{2,4}\\s?[A-Z]?\\d+[./-]?[A-Za-z]?\\d+"
+    description: "Standard AKZ"
+
+ontology_mapping:
+  device_class_to_owl:
+    control_valve: "ievpi:ControlValve"
+    temperature_sensor: "ievpi:TemperatureSensor"
+    pressure_transmitter: "ievpi:PressureTransmitter"
+    flow_meter: "ievpi:FlowMeter"
+    level_sensor: "ievpi:LevelSensor"
